@@ -16,17 +16,25 @@ getWeatherData = async () => {
       let city = data.name;
       var temp1 = "";
       var temp2 = "";
+      var bg = "";
       if (currentWeather == "Rain") {
         temp1 = "It's Raining Now";
         temp2 = "   Don't forget your umberllas !";
+        bg = "./media/night.gif";
       } else if (currentWeather == "Clouds") {
+        temp1 = "It's Cloudy Today";
+        temp2 = "Don't leave your raincoats behind!";
+        bg = "./media/night.gif";
       } else if (currentWeather == "Clear") {
+        temp1 = "The Sun's Out Today";
+        temp2 = "Don't leave your sunglasses at home!";
+        bg = "./media/summer.gif";
       }
-      //   console.log(tempDegree);
+      console.log(bg);
       weatherData.innerHTML = `
      <div
     class="card shadow rounded-3"
-    style="width: 20rem"
+    style="width: 20rem;background-image: url(${bg});"
     id="climateCard"
   >
     <div class="card-body">
