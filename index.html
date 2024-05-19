@@ -63,6 +63,7 @@
             transparent 6px
           ),
           linear-gradient(90deg, rgb(33, 33, 33), rgb(33, 33, 33));
+        transition: background-image 0.5s ease;
       }
       body::before {
         content: "";
@@ -73,6 +74,7 @@
         height: 100%;
         background-size: cover;
         background-position: center;
+        transition: background-image 0.5s ease;
         filter: blur(5px);
         z-index: -1;
       }
@@ -91,6 +93,7 @@
         background-size: cover;
         background-repeat: no-repeat;
         background-position: center;
+        /* transition: background-image 0.5s ease; */
         width: 100%;
         max-height: 500px;
         margin: 75px 0 0 0;
@@ -188,6 +191,7 @@
               value=""
               data-aos="fade-left"
               data-aos-duration="1500"
+              onkeydown="handleKeyPress(event)"
             />
             <button
               id="searchQuerySubmit"

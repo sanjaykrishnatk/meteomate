@@ -77,7 +77,7 @@ getWeatherData = async () => {
         const style = document.createElement("style");
         style.innerHTML = `
           body::before {
-            background-image: url('./media/sunny-3.jpg');
+            background-image: url('./media/sunny-6.jpg');
           }
         `;
         document.head.appendChild(style);
@@ -182,5 +182,9 @@ changeBg = () => {
 if (!isFunctionCalled) {
   intervalId = setInterval(changeBg, 3000);
 }
-
+handleKeyPress = (event) => {
+  if (event.keyCode === 13) {
+    getWeatherData();
+  }
+};
 // https://api.openweathermap.org/data/2.5/weather?q=Kochi&appid=5fe36b192ffd1c36dffb6752bc1722b2
