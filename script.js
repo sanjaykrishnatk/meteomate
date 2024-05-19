@@ -21,14 +21,38 @@ getWeatherData = async () => {
         temp1 = "It's Raining Now";
         temp2 = "   Don't forget your umberllas !";
         bg = "./media/night.gif";
+        // document.body.style.backgroundImage = "url('')";
+        const style = document.createElement("style");
+        style.innerHTML = `
+          body::before {
+            background-image: url('./media/rain-1.jpg');
+          }
+        `;
+        document.head.appendChild(style);
       } else if (currentWeather == "Clouds") {
         temp1 = "It's Cloudy Today";
         temp2 = "Don't leave your raincoats behind!";
         bg = "./media/night.gif";
+        const style = document.createElement("style");
+        style.innerHTML = `
+          body::before {
+            background-image: url('./media/cloud-3.jpg');
+          }
+        `;
+        document.head.appendChild(style);
+        document.body.style.backgroundImage = "url('./media/cloud-1.jpg')";
       } else if (currentWeather == "Clear") {
         temp1 = "The Sun's Out Today";
         temp2 = "Don't leave your sunglasses at home!";
         bg = "./media/summer.gif";
+        const style = document.createElement("style");
+        style.innerHTML = `
+          body::before {
+            background-image: url('./media/sunny-4.jpg');
+          }
+        `;
+        document.head.appendChild(style);
+        document.body.style.backgroundImage = "url('./media/cloud-1.jpg')";
       }
       console.log(bg);
       weatherData.innerHTML = `
