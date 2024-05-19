@@ -32,6 +32,8 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
+    <!-- animate on scroll -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
     <style>
       html,
       body {
@@ -170,6 +172,8 @@
             alt="logo image"
             height="80px"
             width="80px"
+            data-aos="fade-right"
+            data-aos-duration="1500"
           />
         </div>
         <div
@@ -182,12 +186,16 @@
               name="searchQueryInput"
               placeholder="Search"
               value=""
+              data-aos="fade-left"
+              data-aos-duration="1500"
             />
             <button
               id="searchQuerySubmit"
               type="button"
               name="searchQuerySubmit"
               onclick="getWeatherData()"
+              data-aos="fade-left"
+              data-aos-duration="1500"
             >
               <i class="fa-brands fa-searchengin fa-2x"></i>
             </button>
@@ -205,6 +213,8 @@
           class="card shadow rounded-3"
           style="width: 20rem; background-image: url('./media/night.gif')"
           id="climateCard"
+          data-aos="flip-left"
+          data-aos-duration="1500"
         >
           <div class="card-body">
             <h4 class="card-title text-light">Current Weather</h4>
@@ -223,6 +233,10 @@
     </div>
   </body>
   <script src="./script.js"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init();
+  </script>
 </html>
 <!-- <div
           class="card shadow rounded-3"

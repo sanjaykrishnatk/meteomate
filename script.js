@@ -140,6 +140,8 @@ getWeatherData = async () => {
     class="card shadow rounded-3"
     style="width: 20rem;background-image: url(${bg});"
     id="climateCard"
+    data-aos="flip-left"
+    data-aos-duration="1500"
   >
     <div class="card-body">
       <h4 class="card-title text-light">${temp1}</h4>
