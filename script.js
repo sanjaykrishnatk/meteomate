@@ -22,9 +22,9 @@ getWeatherData = async () => {
       console.log(currentWeather);
       let tempDegree = data.main.temp;
       let humidity = data.main.humidity;
+      let wind = data.wind.speed;
       let country = data.sys.country;
       let city = data.name;
-      let cityId = data.id;
       var temp1 = "";
       var temp2 = "";
       var bg = "";
@@ -153,8 +153,26 @@ getWeatherData = async () => {
         alt=""
         class="ms-2 w-25 climate-img"
       />
-      <h4 class="card-title text-light weather-details">${city.toUpperCase()}</h4>
+      <h4 class="card-title text-light weather-details">${city.toUpperCase()} (${country})</h4>
       <h4 class="card-title text-light">${tempDegree}<sup>o</sup>C</h4>
+      <div class="d-flex">
+      <img
+        src="./media/wind.png"
+        class="wpIcon me-2"
+        width="25px"
+        height="25px"
+        alt=""
+      />
+      <h5 class="card-title text-light me-2">${wind}</h5>
+      <img
+        src="./media/humidity.png"
+        width="25px"
+        height="25px"
+        alt=""
+        class="wpIcon me-2"
+      />
+      <h5 class="card-title text-light">${humidity}</h5>
+    </div>
       <h5 class="card-subtitle mb-2 text-light">
         ${localDateTime}
       </h5>

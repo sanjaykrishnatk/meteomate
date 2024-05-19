@@ -129,7 +129,7 @@
           saturate(5%) brightness(300%) !important;
       }
       .weather-details {
-        margin-top: 80%;
+        margin-top: 70%;
       }
       .searchBar {
         width: 60%;
@@ -160,6 +160,9 @@
 
       #searchQuerySubmit:hover {
         cursor: pointer;
+      }
+      .wpIcon {
+        filter: invert(100%) brightness(200%);
       }
     </style>
   </head>
@@ -228,8 +231,28 @@
               alt=""
               class="ms-2 w-25 climate-img"
             />
-            <h4 class="card-title text-light weather-details">City</h4>
+            <h4 class="card-title text-light weather-details">
+              City (Country)
+            </h4>
             <h4 class="card-title text-light">Temparature</h4>
+            <div class="d-flex">
+              <img
+                src="./media/wind.png"
+                class="wpIcon me-2"
+                width="25px"
+                height="25px"
+                alt=""
+              />
+              <h5 class="card-title text-light me-2">0.00</h5>
+              <img
+                src="./media/humidity.png"
+                width="25px"
+                height="25px"
+                alt=""
+                class="wpIcon me-2"
+              />
+              <h5 class="card-title text-light">00</h5>
+            </div>
             <h5 class="card-subtitle mb-2 text-light">Time</h5>
           </div>
         </div>
