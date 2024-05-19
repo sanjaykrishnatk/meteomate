@@ -40,7 +40,27 @@
         height: 100%;
         overflow-x: hidden;
         font-family: "Kanit", sans-serif;
-        background-size: cover;
+        /* background-size: cover; */
+        background-image: radial-gradient(
+            circle at center center,
+            transparent 0%,
+            rgb(33, 33, 33) 99%
+          ),
+          repeating-linear-gradient(
+            0deg,
+            rgba(163, 163, 163, 0.2) 0px,
+            rgba(163, 163, 163, 0.2) 1px,
+            transparent 1px,
+            transparent 6px
+          ),
+          repeating-linear-gradient(
+            90deg,
+            rgba(163, 163, 163, 0.2) 0px,
+            rgba(163, 163, 163, 0.2) 1px,
+            transparent 1px,
+            transparent 6px
+          ),
+          linear-gradient(90deg, rgb(33, 33, 33), rgb(33, 33, 33));
       }
       body::before {
         content: "";
@@ -61,18 +81,17 @@
       }
 
       .col-md-6 {
-        padding-right: 0; /* Remove default padding from columns */
+        padding-right: 0;
         padding-left: 0;
       }
 
       #climateCard {
-        /* background-image: url("./media/night.gif"); */
         background-size: cover;
         background-repeat: no-repeat;
         background-position: center;
         width: 100%;
-        min-height: 500px;
-        margin: 0;
+        max-height: 500px;
+        margin: 75px 0 0 0;
         padding: 0;
         position: relative;
       }
@@ -102,10 +121,10 @@
 
       .climate-img {
         filter: drop-shadow(10px 10px 10px rgba(0, 0, 0, 0.5)) invert(100%)
-          saturate(0%) brightness(300%) !important;
+          saturate(5%) brightness(300%) !important;
       }
       .weather-details {
-        margin-top: 100%;
+        margin-top: 80%;
       }
       .searchBar {
         width: 60%;
@@ -143,7 +162,7 @@
     <nav>
       <div class="row">
         <div
-          class="col-md-6 col-sm-12 d-flex justify-content-center align-items-center mt-3"
+          class="col-md-6 col-sm-12 d-flex justify-content-center align-items-center mt-4"
         >
           <img
             class="logo-img"
@@ -154,7 +173,7 @@
           />
         </div>
         <div
-          class="col-md-6 col-sm-12 d-flex justify-content-center align-items-center mt-3"
+          class="col-md-6 col-sm-12 d-flex justify-content-center align-items-center mt-4"
         >
           <div class="searchBar">
             <input
@@ -178,11 +197,34 @@
     </nav>
     <div class="row">
       <div
-        class="col-md-6 d-flex justify-content-center align-items-center"
+        class="col-12 d-flex justify-content-center"
         style="height: 100vh"
         id="weatherData"
       >
-        <!-- <div
+        <div
+          class="card shadow rounded-3"
+          style="width: 20rem; background-image: url('./media/night.gif')"
+          id="climateCard"
+        >
+          <div class="card-body">
+            <h4 class="card-title text-light">Current Weather</h4>
+            <h5 class="card-subtitle mb-2 text-light">Weather Advisory</h5>
+            <img
+              src="./media/cloudy-2.png"
+              alt=""
+              class="ms-2 w-25 climate-img"
+            />
+            <h4 class="card-title text-light weather-details">City</h4>
+            <h4 class="card-title text-light">Temparature</h4>
+            <h5 class="card-subtitle mb-2 text-light">Time</h5>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script src="./script.js"></script>
+</html>
+<!-- <div
           class="card shadow rounded-3"
           style="width: 20rem"
           id="climateCard"
@@ -204,21 +246,3 @@
             </h5>
           </div>
         </div> -->
-      </div>
-      <div class="col-md-6 justify-content-center align-items-center p-5">
-        <div class="card mt-4">
-          <div class="card-header">Featured</div>
-          <div class="card-body">
-            <h5 class="card-title">Special title treatment</h5>
-            <p class="card-text">
-              With supporting text below as a natural lead-in to additional
-              content.
-            </p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </body>
-  <script src="./script.js"></script>
-</html>
