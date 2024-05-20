@@ -34,13 +34,14 @@
     />
     <!-- animate on scroll -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <style>
       html,
       body {
         margin: 0;
         padding: 0;
         height: 100%;
-        overflow-x: hidden;
+        /* overflow-x: hidden; */
         font-family: "Kanit", sans-serif;
         /* background-size: cover; */
         background-image: radial-gradient(
@@ -302,12 +303,12 @@
             </div>
           </div>
           <div class="row mt-3">
-            <div class="col-md-4">
-              <div
-                class="card rounded-3 b-0 forecastCard"
-                data-aos="flip-right"
-                data-aos-duration="1500"
-              >
+            <div
+              class="col-md-4"
+              data-aos="flip-right"
+              data-aos-duration="1500"
+            >
+              <div class="card rounded-3 b-0 forecastCard">
                 <div class="card-body bg-dark rounded-3 b-0">
                   <h5 class="card-title text-light text-center"><b>9 AM</b></h5>
                   <img src="./media/cloudy.png" alt="" class="ms-3 w-75 mb-2" />
@@ -317,12 +318,8 @@
                 </div>
               </div>
             </div>
-            <div class="col-md-4">
-              <div
-                class="card rounded-3 b-0 forecastCard"
-                data-aos="flip-left"
-                data-aos-duration="1500"
-              >
+            <div class="col-md-4" data-aos="flip-left" data-aos-duration="1500">
+              <div class="card rounded-3 b-0 forecastCard">
                 <div class="card-body bg-dark rounded-3 b-0">
                   <h5 class="card-title text-light text-center">
                     <b>12 PM</b>
@@ -334,12 +331,12 @@
                 </div>
               </div>
             </div>
-            <div class="col-md-4">
-              <div
-                class="card rounded-3 b-0 forecastCard"
-                data-aos="flip-right"
-                data-aos-duration="1500"
-              >
+            <div
+              class="col-md-4"
+              data-aos="flip-right"
+              data-aos-duration="1500"
+            >
+              <div class="card rounded-3 b-0 forecastCard">
                 <div class="card-body bg-dark rounded-3 b-0">
                   <h5 class="card-title text-light text-center"><b>3 PM</b></h5>
                   <img src="./media/cloudy.png" alt="" class="ms-3 w-75 mb-2" />
@@ -434,20 +431,15 @@
               </div>
             </div>
           </div>
-          <!-- <div class="row">
-            <div class="col-md-4"></div>
-            <div class="col-md-4"></div>
-            <div class="col-md-4"></div>
-          </div> -->
         </div>
       </div>
     </div>
+    <script>
+      AOS.init();
+      window.addEventListener("load", AOS.refresh);
+    </script>
   </body>
   <script src="./script.js"></script>
-  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-  <script>
-    AOS.init();
-  </script>
 </html>
 <!-- <div
           class="card shadow rounded-3"
