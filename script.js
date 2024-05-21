@@ -7,19 +7,15 @@ getWeatherData = async () => {
   isFunctionCalled = true;
   let cityName = searchQueryInput.value;
   if (cityName) {
-    // console.log(cityName);
     document.body.style.background = "none";
-    const now = new Date();
-    const localDateTime = now.toLocaleString();
-    console.log(localDateTime);
+    const dateObj = new Date();
+    const localDateTime = dateObj.toString().substring(4);
     const response = await fetch(
       `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=d4b89c4b3c286935a01b731ef3bc8720&units=metric`
     );
     response.json().then((data) => {
-      console.log(data);
       let currentWeather = data.weather[0].main;
       // let currentWeather = "Snow";
-      console.log(currentWeather);
       let tempDegree = data.main.temp;
       let humidity = data.main.humidity;
       let wind = data.wind.speed;
@@ -113,6 +109,7 @@ getWeatherData = async () => {
         temp1 = "Conditions dusty, smoky, or sandy";
         temp2 = "Expecting poor air quality due to smoke, dust, and sand";
         bg = "./media/desert.gif";
+        weatherIcon = "./media/cloudy-2.png";
         const style = document.createElement("style");
         style.innerHTML = `
           body::before {
@@ -133,7 +130,6 @@ getWeatherData = async () => {
         document.head.appendChild(style);
       }
 
-      console.log(bg);
       weatherData.innerHTML = "";
       weatherData.innerHTML = `
      <div
@@ -163,7 +159,7 @@ getWeatherData = async () => {
         height="25px"
         alt=""
       />
-      <h5 class="card-title text-light me-2">${wind}</h5>
+      <h5 class="card-title text-light me-2">${wind} Kmph</h5>
       <img
         src="./media/humidity.png"
         width="25px"
@@ -203,6 +199,261 @@ if (!isFunctionCalled) {
 handleKeyPress = (event) => {
   if (event.keyCode === 13) {
     getWeatherData();
+    getWeatherForecast();
   }
 };
 // https://api.openweathermap.org/data/2.5/weather?q=Kochi&appid=5fe36b192ffd1c36dffb6752bc1722b2
+getWeatherForecast = async () => {
+  let city = searchQueryInput.value;
+  const weatherImages = {
+    Rain: "./media/rain-icon.png",
+    Clear: "./media/sunny.png",
+    Thunderstorm: "./media/thunderstorm-2.png",
+    Drizzle: "./media/rain-icon.png",
+    Clouds: "./media/cloudy.png",
+    Snow: "./media/snow.png",
+    Mist: "./media/mist.png",
+    Haze: "./media/mist.png",
+    Smoke: "./media/cloudy.png",
+    Dust: "./media/cloudy.png",
+    Sand: "./media/cloudy.png",
+  };
+  getWeatherIcon = (weather) => {
+    if (weather in weatherImages) {
+      return weatherImages[weather];
+    } else {
+      return "./media/cloudy.png";
+    }
+  };
+  const forecastResponse = await fetch(
+    `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=d4b89c4b3c286935a01b731ef3bc8720&units=metric`
+  );
+  forecastResponse.json().then((data) => {
+    const dayOne = data.list.slice(5, 13);
+    const minTemp = dayOne.map((item) => item.main.temp_min);
+    const avgMinTemp = (
+      minTemp.reduce((t1, t2) => t1 + t2) / minTemp.length -
+      1
+    ).toFixed(2);
+    const maxTemp = dayOne.map((item) => item.main.temp_max);
+    const avgMaxTemp = (
+      maxTemp.reduce((t1, t2) => t1 + t2) / maxTemp.length -
+      1
+    ).toFixed(2);
+
+    const dayOne1Main = getWeatherIcon(dayOne[3].weather[0].main);
+    const dayOne2Main = getWeatherIcon(dayOne[4].weather[0].main);
+    const dayOne3Main = getWeatherIcon(dayOne[5].weather[0].main);
+
+    const dayOne1Desc = dayOne[3].weather[0].description;
+    const dayOne2Desc = dayOne[4].weather[0].description;
+    const dayOne3Desc = dayOne[5].weather[0].description;
+
+    dayTwo = data.list.slice(13, 21);
+    minTempD2 = dayTwo.map((item) => item.main.temp_min);
+    avgMinTempD2 = (
+      minTempD2.reduce((t1, t2) => t1 + t2) / minTempD2.length -
+      1
+    ).toFixed(2);
+
+    maxTempD2 = dayTwo.map((item) => item.main.temp_max);
+    avgMaxTempD2 = (
+      maxTempD2.reduce((t1, t2) => t1 + t2) / maxTempD2.length -
+      1
+    ).toFixed(2);
+
+    const dayTwo1Main = getWeatherIcon(dayTwo[3].weather[0].main);
+    const dayTwo2Main = getWeatherIcon(dayTwo[4].weather[0].main);
+    const dayTwo3Main = getWeatherIcon(dayTwo[5].weather[0].main);
+    const dayTwo1Desc = dayTwo[3].weather[0].description;
+    const dayTwo2Desc = dayTwo[4].weather[0].description;
+    const dayTwo3Desc = dayTwo[5].weather[0].description;
+
+    //day one updation
+    day1.innerHTML = `         <div
+    class="col-4 d-flex justify-content-center align-items-center"
+    data-aos="fade-up"
+    data-aos-duration="500"
+  >
+    <h5 class="text-light mb-0 mt-2"><b>Tommorow</b></h5>
+  </div>
+  <div
+    class="col-4 d-flex justify-content-center align-items-center"
+    data-aos="fade-up"
+    data-aos-duration="500"
+  >
+    <h5 class="text-light mb-0 mt-2">
+      <b id="minTempD1">Min Temp : ${avgMinTemp}<sup>o</sup>C</b>
+    </h5>
+  </div>
+  <div
+    class="col-4 d-flex justify-content-center align-items-center"
+    data-aos="fade-up"
+    data-aos-duration="500"
+  >
+    <h5 class="text-light mb-0 mt-2">
+      <b>Max Temp : ${avgMaxTemp}<sup>o</sup>C</b>
+    </h5>
+  </div>`;
+    day1Weather.innerHTML = `
+  <div
+  class="col-md-4 d-flex justify-content-center align-items-center"
+  data-aos="fade-up"
+  data-aos-duration="1500"
+>
+  <div class="card rounded-3 b-0 forecastCard">
+    <div class="card-body bg-dark rounded-3 b-0">
+      <h5 class="card-title text-light text-center"><b>9 AM</b></h5>
+      <div class="d-flex justify-content-center align-items-center">
+        <img
+          src="${dayOne1Main}"
+          alt=""
+          class="ms-3 w-75 mb-2 forecastIcon"
+        />
+      </div>
+      <h6 class="card-subtitle mb-2 text-light text-center">
+        <b>${dayOne1Desc.toUpperCase()}</b>
+      </h6>
+    </div>
+  </div>
+</div>
+<div
+  class="col-md-4 d-flex justify-content-center align-items-center"
+  data-aos="fade-up"
+  data-aos-duration="1500"
+>
+  <div class="card rounded-3 b-0 forecastCard">
+    <div class="card-body bg-dark rounded-3 b-0">
+      <h5 class="card-title text-light text-center">
+        <b>12 PM</b>
+      </h5>
+      <div class="d-flex justify-content-center align-items-center">
+        <img
+          src="${dayOne2Main}"
+          alt=""
+          class="ms-3 w-75 mb-2 forecastIcon"
+        />
+      </div>
+      <h6 class="card-subtitle mb-2 text-light text-center">
+        <b>${dayOne2Desc.toUpperCase()}</b>
+      </h6>
+    </div>
+  </div>
+</div>
+<div
+  class="col-md-4 d-flex justify-content-center align-items-center"
+  data-aos="fade-up"
+  data-aos-duration="1500"
+>
+  <div class="card rounded-3 b-0 forecastCard">
+    <div class="card-body bg-dark rounded-3 b-0">
+      <h5 class="card-title text-light text-center"><b>3 PM</b></h5>
+      <div class="d-flex justify-content-center align-items-center">
+        <img
+          src="${dayOne3Main}"
+          alt=""
+          class="ms-3 w-75 mb-2 forecastIcon"
+        />
+      </div>
+      <h6 class="card-subtitle mb-2 text-light text-center">
+        <b>${dayOne3Desc.toUpperCase()}</b>
+      </h6>
+    </div>
+  </div>
+</div>
+  `;
+
+    day2.innerHTML = ` <div
+  class="col-4 d-flex justify-content-center align-items-center"
+  data-aos="fade-up"
+  data-aos-duration="500"
+>
+  <h5 class="text-light mb-0 mt-2"><b>Day after tommorow</b></h5>
+</div>
+<div
+  class="col-4 d-flex justify-content-center align-items-center"
+  data-aos="fade-up"
+  data-aos-duration="500"
+>
+  <h5 class="text-light mb-0 mt-2">
+    <b>Min Temp : ${avgMinTempD2}<sup>o</sup>C</b>
+  </h5>
+</div>
+<div
+  class="col-4 d-flex justify-content-center align-items-center"
+  data-aos="fade-up"
+  data-aos-duration="500"
+>
+  <h5 class="text-light mb-0 mt-2">
+    <b>Max Temp :  ${avgMaxTempD2}<sup>o</sup>C</b>
+  </h5>
+</div>`;
+    day2Weather.innerHTML = `
+<div
+class="col-md-4 d-flex justify-content-center align-items-center"
+data-aos="fade-up"
+data-aos-duration="1500"
+>
+<div class="card rounded-3 b-0 forecastCard">
+  <div class="card-body bg-dark rounded-3 b-0">
+    <h5 class="card-title text-light text-center"><b>9 AM</b></h5>
+    <div class="d-flex justify-content-center align-items-center">
+      <img
+        src="${dayTwo1Main}"
+        alt=""
+        class="ms-3 w-75 mb-2 forecastIcon"
+      />
+    </div>
+    <h6 class="card-subtitle mb-2 text-light text-center">
+      <b>${dayTwo1Desc.toUpperCase()}</b>
+    </h6>
+  </div>
+</div>
+</div>
+<div
+class="col-md-4 d-flex justify-content-center align-items-center"
+data-aos="fade-up"
+data-aos-duration="1500"
+>
+<div class="card rounded-3 b-0 forecastCard">
+  <div class="card-body bg-dark rounded-3 b-0">
+    <h5 class="card-title text-light text-center">
+      <b>12 PM</b>
+    </h5>
+    <div class="d-flex justify-content-center align-items-center">
+      <img
+        src="${dayTwo2Main}"
+        alt=""
+        class="ms-3 w-75 mb-2 forecastIcon"
+      />
+    </div>
+    <h6 class="card-subtitle mb-2 text-light text-center">
+      <b>${dayTwo2Desc.toUpperCase()}</b>
+    </h6>
+  </div>
+</div>
+</div>
+<div
+class="col-md-4 d-flex justify-content-center align-items-center"
+data-aos="fade-up"
+data-aos-duration="1500"
+>
+<div class="card rounded-3 b-0 forecastCard">
+  <div class="card-body bg-dark rounded-3 b-0">
+    <h5 class="card-title text-light text-center"><b>3 PM</b></h5>
+    <div class="d-flex justify-content-center align-items-center">
+      <img
+        src="${dayTwo3Main}"
+        alt=""
+        class="ms-3 w-75 mb-2 forecastIcon"
+      />
+    </div>
+    <h6 class="card-subtitle mb-2 text-light text-center">
+      <b>${dayTwo3Desc.toUpperCase()}</b>
+    </h6>
+  </div>
+</div>
+</div>
+`;
+  });
+};
