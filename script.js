@@ -229,17 +229,11 @@ getWeatherForecast = async () => {
     `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=d4b89c4b3c286935a01b731ef3bc8720&units=metric`
   );
   forecastResponse.json().then((data) => {
-    const dayOne = data.list.slice(5, 13);
+    const dayOne = data.list.slice(8, 16);
     const minTemp = dayOne.map((item) => item.main.temp_min);
-    const avgMinTemp = (
-      minTemp.reduce((t1, t2) => t1 + t2) / minTemp.length -
-      1
-    ).toFixed(2);
+    const minTempValue = minTemp.reduce((t1, t2) => (t1 < t2 ? t1 : t2));
     const maxTemp = dayOne.map((item) => item.main.temp_max);
-    const avgMaxTemp = (
-      maxTemp.reduce((t1, t2) => t1 + t2) / maxTemp.length -
-      1
-    ).toFixed(2);
+    const maxTempValue = maxTemp.reduce((t1, t2) => (t1 > t2 ? t1 : t2));
 
     const dayOne1Main = getWeatherIcon(dayOne[3].weather[0].main);
     const dayOne2Main = getWeatherIcon(dayOne[4].weather[0].main);
@@ -249,18 +243,12 @@ getWeatherForecast = async () => {
     const dayOne2Desc = dayOne[4].weather[0].description;
     const dayOne3Desc = dayOne[5].weather[0].description;
 
-    dayTwo = data.list.slice(13, 21);
+    dayTwo = data.list.slice(16, 24);
     minTempD2 = dayTwo.map((item) => item.main.temp_min);
-    avgMinTempD2 = (
-      minTempD2.reduce((t1, t2) => t1 + t2) / minTempD2.length -
-      1
-    ).toFixed(2);
+    minTempValueD2 = minTempD2.reduce((t1, t2) => (t1 < t2 ? t1 : t2));
 
     maxTempD2 = dayTwo.map((item) => item.main.temp_max);
-    avgMaxTempD2 = (
-      maxTempD2.reduce((t1, t2) => t1 + t2) / maxTempD2.length -
-      1
-    ).toFixed(2);
+    maxTempValueD2 = maxTempD2.reduce((t1, t2) => (t1 > t2 ? t1 : t2));
 
     const dayTwo1Main = getWeatherIcon(dayTwo[3].weather[0].main);
     const dayTwo2Main = getWeatherIcon(dayTwo[4].weather[0].main);
@@ -282,18 +270,18 @@ getWeatherForecast = async () => {
     data-aos="fade-up"
     data-aos-duration="500"
   >
-    <h5 class="text-light mb-0 mt-2">
-      <b id="minTempD1">Min Temp : ${avgMinTemp}<sup>o</sup>C</b>
-    </h5>
+    <h6 class="text-light mb-0 mt-2">
+      <b id="minTempD1">Min Temp : ${minTempValue}<sup>o</sup>C</b>
+    </h6>
   </div>
   <div
     class="col-4 d-flex justify-content-center align-items-center"
     data-aos="fade-up"
     data-aos-duration="500"
   >
-    <h5 class="text-light mb-0 mt-2">
-      <b>Max Temp : ${avgMaxTemp}<sup>o</sup>C</b>
-    </h5>
+    <h6 class="text-light mb-0 mt-2">
+      <b>Max Temp : ${maxTempValue}<sup>o</sup>C</b>
+    </h6>
   </div>`;
     day1Weather.innerHTML = `
   <div
@@ -375,18 +363,18 @@ getWeatherForecast = async () => {
   data-aos="fade-up"
   data-aos-duration="500"
 >
-  <h5 class="text-light mb-0 mt-2">
-    <b>Min Temp : ${avgMinTempD2}<sup>o</sup>C</b>
-  </h5>
+  <h6 class="text-light mb-0 mt-2">
+    <b>Min Temp : ${minTempValueD2}<sup>o</sup>C</b>
+  </h6>
 </div>
 <div
   class="col-4 d-flex justify-content-center align-items-center"
   data-aos="fade-up"
   data-aos-duration="500"
 >
-  <h5 class="text-light mb-0 mt-2">
-    <b>Max Temp :  ${avgMaxTempD2}<sup>o</sup>C</b>
-  </h5>
+  <h6 class="text-light mb-0 mt-2">
+    <b>Max Temp :  ${maxTempValueD2}<sup>o</sup>C</b>
+  </h6>
 </div>`;
     day2Weather.innerHTML = `
 <div

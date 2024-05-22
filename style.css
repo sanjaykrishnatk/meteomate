@@ -5,7 +5,6 @@ body {
   height: 100%;
   /* overflow-x: hidden; */
   font-family: "Kanit", sans-serif;
-  /* background-size: cover; */
   background-image: radial-gradient(
       circle at center center,
       transparent 0%,
@@ -58,7 +57,6 @@ body::before {
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-  /* transition: background-image 0.5s ease; */
   width: 100%;
   max-height: 500px;
   margin: 75px 0 0 0;
